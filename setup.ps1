@@ -187,6 +187,22 @@ if (Test-Path $CloneDir) {
 }
 
 # ---------------------------------------------------------------------------
+# Step 5b: Register the Matador usage-telemetry hook in settings.json
+# Plugin.json SessionEnd hooks do NOT fire on Claude Code for Windows; the
+# settings.json hook chain does. This self-locating script adds it idempotently.
+# ---------------------------------------------------------------------------
+Write-Step "Registering Matador usage telemetry (SessionEnd hook)"
+$registerScript = Join-Path $CloneDir 'scripts\register-telemetry-hook.mjs'
+if (Test-Path $registerScript) {
+    Invoke-OrDryRun "node register-telemetry-hook.mjs" {
+        & node $registerScript 2>&1 | ForEach-Object { Write-Host "    $_" -ForegroundColor DarkGray }
+    }
+    Write-Ok "Telemetry registered (usage appears in Matador after a clean /exit)"
+} else {
+    Write-Skip "register-telemetry-hook.mjs not in clone yet - pull the repo and re-run"
+}
+
+# ---------------------------------------------------------------------------
 # Step 6: Set TEAM_TOKEN as a User-scope env var
 # ---------------------------------------------------------------------------
 Write-Step "Setting TEAM_TOKEN env var (used by meta-marketing, google-workspace, gbp MCPs)"

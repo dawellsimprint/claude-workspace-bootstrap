@@ -10,7 +10,7 @@
   runs the idempotent registration script. Safe to run more than once.
 
   Run with:
-      iwr https://raw.githubusercontent.com/dawellsimprint/claude-workspace-bootstrap/main/patch-telemetry.ps1 | iex
+      iex (iwr -UseBasicParsing https://raw.githubusercontent.com/dawellsimprint/claude-workspace-bootstrap/main/patch-telemetry.ps1).Content
 #>
 
 $ErrorActionPreference = 'Stop'

@@ -9,7 +9,7 @@
 
   Designed to be invoked from a fresh PowerShell window with:
 
-      iwr https://raw.githubusercontent.com/dawellsimprint/claude-workspace/main/scripts/setup.ps1 | iex
+      iex (iwr -UseBasicParsing https://raw.githubusercontent.com/dawellsimprint/claude-workspace/main/scripts/setup.ps1).Content
 
   Or after cloning, from the repo root:
 

@@ -9,7 +9,7 @@ This is the **public installer** for the (private) team workspace at [dawellsimp
 Open PowerShell on Windows and paste:
 
 ```powershell
-iwr https://raw.githubusercontent.com/dawellsimprint/claude-workspace-bootstrap/main/setup.ps1 | iex
+iex (iwr -UseBasicParsing https://raw.githubusercontent.com/dawellsimprint/claude-workspace-bootstrap/main/setup.ps1).Content
 ```
 
 On macOS or Linux:
